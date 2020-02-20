@@ -5,12 +5,14 @@ const _ = require('lodash');
 
 module.exports = Tokey;
 function Tokey(key) {
-    let self = this;        
+    let self = this;    
+        
+    self.dateStringLength = 14;
     self.key = key || self.createKey();    
 }
 
 Tokey.prototype.createKey = function createKey(options = {}) {
-    let dateStringLength = 14;
+    let self = this;
     let key = {};
     
     // seconds
@@ -22,18 +24,19 @@ Tokey.prototype.createKey = function createKey(options = {}) {
     key.randomStringLength = options.randomStringLength || 26;
     
     key.mix = [];
-    for(let i=0; i < (dateStringLength + key.randomStringLength); i++) {
+    for(let i=0; i < (self.dateStringLength + key.randomStringLength); i++) {
         key.mix.push(i);
     }
     key.mix = _.shuffle(key.mix);
     
+    self.key = key;
     return key;
 }
 
 Tokey.prototype.generate = function(options = {}) {
     let self = this; 
         
-    let date = options.date || new Date();
+    let date = options.date || new Date();    
     
     let dateParts = {
         year: date.getUTCFullYear(),
@@ -64,6 +67,10 @@ Tokey.prototype.generate = function(options = {}) {
 Tokey.prototype.verify = function(token) {  
     let self = this;
     
+    if (typeof(token) !== 'string' || token.length !== (self.dateStringLength + self.key.randomStringLength)) {
+        return false;
+    }
+    
     let unmixed = _.map(self.key.mix, (pos, index) => 
         token[self.key.mix.indexOf(index)]
     ).join('');
@@ -86,6 +93,5 @@ Tokey.prototype.verify = function(token) {
     );
     
     let diffSeconds = ((new Date()) - date) / 1000;
-    console.log(date, diffSeconds, self.key.lifetime);
     return diffSeconds <= self.key.lifetime;
 }

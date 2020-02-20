@@ -1,0 +1,22 @@
+{
+    "name": "tokey",
+    "version": "0.0.1",
+    "description": "simple time-based tokens",
+    "main": "index.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "tdd": "jest --config test/jest.conf.js --watch",
+        "unit": "jest --config test/jest.conf.js",
+        "test": "npm run unit"
+    },
+    "dependencies": {
+        "lodash": "^4.17.15"
+    },
+    "devDependencies": {
+        "jest": "^24.1.0"
+    },
+    "author": "Oliver Liermann <hey@logi.codes>",
+    "license": "ISC"
+}

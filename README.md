@@ -1,7 +1,8 @@
 # Tokey
-- generate a key and use it on all peers
-- now generate a token on the sending peer
-- verify the token on the receiving end
+
+-   generate a key and use it on all peers
+-   generate a token on the sending peer
+-   verify the token on the receiving peer
 
 ```javascript
 /* new instance, you can pass a key or a new one will be created
@@ -11,9 +12,9 @@
     - randomStringLength
     - mix
 */
-let tokey = new Tokey(key);
+let tokey = new Tokey(key)
 
-/* create a custom key
+/* create a custom key (the 'mix' property will be generated)
     options:
     - lifetime (int) duration in seconds a token is valid
     - contentOffset (int) char-code offset for obfuscating the string

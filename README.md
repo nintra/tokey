@@ -1,8 +1,10 @@
 # Tokey
+Simple time-based token generator to hinder unwanted server requests.
 
--   generate a key and use it on all peers
--   generate a token on the sending peer
--   verify the token on the receiving peer
+- generates a token based on the current time 
+- randomizes it based on a `key`
+- provide the same `key` on all peers to allow generation and verification
+
 
 ```javascript
 /* new instance, you can pass a key or a new one will be created

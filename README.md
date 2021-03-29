@@ -7,26 +7,23 @@ Simple time-based token generator to hinder unwanted server requests.
 
 
 ```javascript
-/* new instance, you can pass a key or a new one will be created
-    key: 
-    - lifetime
-    - contentOffset
-    - randomStringLength
-    - mix
-*/
+/* new instance, you can pass a key or a new one will be created */
 let tokey = new Tokey(key)
 
 /* create a custom key (the 'mix' property will be generated)
     options:
-    - lifetime (int) duration in seconds a token is valid
-    - contentOffset (int) char-code offset for obfuscating the string
-    - randomStringLength (int) length of random characters added to the content string
+    - lifetime (int) duration in seconds a token is valid, default: 30
+    - contentOffset (int) char-code offset for obfuscating the string, default: random
+    - randomStringLength (int) length of random characters added to the content string, default: 26
+    
+    returns an object with these `options` and adds the `mix` property 
+    - mix (array) positions for mixing the string    
 */
 let key = tokey.createKey(options)
 
 /* generate a time-based token
     options:
-        - date (date) date of the token, default: now
+    - date (date) date of the token, default: now
 */
 let token = tokey.generate(options)
 
